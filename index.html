@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>El Faro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/icono el faro.icon">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        header, nav, footer {
+            background-color: #f2f2f2;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-container {
+            padding: 0 20px;
+        }
+
+        .article-counter {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin: 30px 0;
+        }
+
+        form input, form textarea {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 400px;
+            padding: 8px;
+        }
+
+        form button {
+            padding: 10px 20px;
+        }
+
+        #clock {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        article {
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="img/icono el faro.png" alt="logotipo el faro" title="logotipo icono_el_faro" width="200"/>
+    <h1>Noticias - El Faro</h1>
+    <div id="clock"></div>
+</header>
+
+<nav>
+    <ul>
+        <li><a class="nav-enlace inicio" href="index.html" target="_blank">Inicio</a></li>
+        <li><a class="nav-enlace inicio" href="deportes-index.html" target="_blank">Deportes</a></li>
+        <li><a class="nav-enlace inicio" href="negocios-index.html" target="_blank">Negocios</a></li>
+    </ul>
+</nav>
+
+<div class="main-container">
+    <div class="article-counter" id="articleCounter">Cantidad de artículos: 3</div>
+
+    <article>
+        <h2>Como es la "enfermedad carnívora" que remece a Japón: los casos van en aumento</h2>
+        <p><strong>Salud</strong></p>
+        <p>En alerta y expectantes se encuentran las autoridades sanitarias en Japón... <a href="noticia-1.html">Clic aquí</a></p>
+    </article>
+
+    <article>
+        <h2>Triple homicidio en Río Bueno: formalizan a imputado...</h2>
+        <p><strong>Crimen</strong></p>
+        <p>Presentando papeles médicos, el defensor penal público pidió que se suspendiera el procedimiento... <a href="noticia-2.html">Clic aquí</a></p>
+    </article>
+
+    <article>
+        <h2>El cambio de hora se acerca: infórmate sobre lo que necesitas saber</h2>
+        <p><strong>Cambio de hora</strong></p>
+        <p>El cambio de hora en Chile se llevará a cabo el 5 de abril de 2025... <a href="noticia-3.html">Clic aquí</a></p>
+    </article>
+
+    <h3>Agregar nuevo artículo</h3>
+    <form id="articleForm">
+        <input type="text" id="articleTitle" placeholder="Título del artículo" required>
+        <textarea id="articleContent" placeholder="Contenido del artículo" rows="4" required></textarea>
+        <button type="submit">Agregar artículo</button>
+    </form>
+
+    <h3>Contacto</h3>
+    <form id="contactForm">
+        <input type="text" placeholder="Nombre" required>
+        <textarea placeholder="Mensaje" rows="4" required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+<footer>
+    © 2025 El Faro. Todos los derechos reservados.
+</footer>
+
+<script>
+    // Reloj en vivo
+    function updateClock() {
+        const clock = document.getElementById('clock');
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateString = now.toLocaleDateString('es-ES', options);
+        const timeString = now.toLocaleTimeString('es-ES');
+        clock.textContent = `${dateString} - ${timeString}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Agregar artículo dinámicamente
+    const articleForm = document.getElementById('articleForm');
+    const mainContainer = document.querySelector('.main-container');
+    const articleCounter = document.getElementById('articleCounter');
+
+    function updateArticleCount() {
+        const count = document.querySelectorAll('article').length;
+        articleCounter.textContent = `Cantidad de artículos: ${count}`;
+    }
+
+    articleForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const title = document.getElementById('articleTitle').value.trim();
+        const content = document.getElementById('articleContent').value.trim();
+
+        if (title && content) {
+            const newArticle = document.createElement('article');
+            newArticle.innerHTML = `
+                <h2>${title}</h2>
+                <p>${content}</p>
+            `;
+            mainContainer.insertBefore(newArticle, articleForm);
+            updateArticleCount();
+            articleForm.reset();
+        }
+    });
+
+    updateArticleCount();
+</script>
+
+</body>
+</html>

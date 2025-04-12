@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>noticias- El Faro</title>
+  <link rel="icon" href="img/icono el faro.icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    #reloj {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      background-color: #ddd;
+      margin: 0;
+    }
+
+    nav li {
+      margin: 10px;
+    }
+
+    nav a {
+      text-decoration: underline;
+      color: #000;
+      transition: font-weight 0.2s, text-decoration 0.2s;
+    }
+
+    nav a:hover, .enlace-not:hover {
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 20px;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 15px;
+      background-color: white;
+      transition: background-color 0.3s, color 0.3s;
+      text-align: left;
+    }
+
+    tr:hover td {
+      background-color: black;
+      color: white;
+    }
+
+    footer {
+      background-color: #c9d2d0;
+      color: #31231e;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="img/icono el faro.png" alt="Logotipo El Faro" title="Logotipo El Faro" width="200" />
+    <div id="reloj"></div> <!-- Reloj en vivo -->
+  </header>
+
+  <h1>Noticias - El Faro</h1>
+
+  <nav>
+    <ul>
+      <li><a href="index.html" target="_blank">Inicio</a></li>
+      <li><a href="deportes-index.html" target="_blank">Deportes</a></li>
+      <li><a href="negocio-index.html" target="_blank">Negocio</a></li>
+    </ul>
+  </nav>
+
+  <section id="Noticias">
+    <h1 class="noticia">noticias</h1>
+
+    <!-- Formulario para agregar artículos -->
+    <div style="width: 90%; margin: auto; margin-bottom: 20px;">
+      <h2>Agregar nuevo artículo</h2>
+      <input type="text" id="titulo" placeholder="Título del artículo" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+      <textarea id="texto" placeholder="Texto del artículo" style="width: 100%; padding: 8px; margin-bottom: 10px;"></textarea>
+      <button onclick="agregarArticulo()" style="padding: 10px 15px;">Agregar</button>
+    </div>
+
+    <!-- Contador de artículos -->
+    <p id="contador" style="text-align: center; font-weight: bold;">Cantidad de artículos: 3</p>
+
+    <table>
+      <tr>
+        <th>Título</th>
+        <th>Categoría</th>
+        <th>Texto del artículo</th>
+      </tr>
+      <tr>
+        <td>Cómo la red social Reddit logró alcanzar un valor de US$9.000 millones y convertirse en el preciado objetivo de las empresas de inteligencia artificial.</td>
+        <td>Deportes</td>
+        <td>Reddit tuvo un debut soñado en la bolsa de Nueva York. Los 22 millones de acciones subieron un 48% el 21 de marzo. En su punto máximo, la empresa alcanzó un valor de US$9.000 millones. <a class="enlace-not" href="negocio-1.html" target="_blank">Clic aquí</a></td>
+      </tr>
+      <tr>
+        <td>Los éxitos de Adam Sandler en Netflix lo convierten en el actor mejor pagado de Hollywood, según Forbes.</td>
+        <td>Deportes</td>
+        <td>Puede que Adam Sandler no esté nominado a ningún Oscar este fin de semana, pero su comedia de suspenso lo ayudó a ser el actor mejor pagado de Hollywood. <a class="enlace-not" href="negocio-2.html" target="_blank">Clic aquí</a></td>
+      </tr>
+      <tr>
+        <td>"Es como Amazon con esteroides": cómo funciona Temu, el gigante chino que está sacudiendo el mercado de compras online.</td>
+        <td>Deportes</td>
+        <td>Al ingresar a Temu, una cascada de productos llena la pantalla. Todo con descuentos y reseñas positivas. Ideal para quienes buscan precios bajos. <a class="enlace-not" href="negocio-3.html" target="_blank">Clic aquí</a></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Formulario de contacto -->
+  <section style="width: 90%; margin: auto;">
+    <h2>Formulario de contacto</h2>
+    <input type="text" id="nombreContacto" placeholder="Tu nombre" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+    <textarea id="mensajeContacto" placeholder="Tu mensaje" style="width: 100%; padding: 8px; margin-bottom: 10px;"></textarea>
+    <button onclick="enviarContacto()" style="padding: 10px 15px;">Enviar</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Noticias El Faro. Derechos reservados.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Actualizar reloj en vivo
+    function actualizarHora() {
+      const ahora = new Date();
+      const opciones = {
+        weekday: 'long', year: 'numeric', month: 'long',
+        day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
+      };
+      document.getElementById('reloj').innerText = ahora.toLocaleString('es-ES', opciones);
+    }
+    setInterval(actualizarHora, 1000);
+    actualizarHora();
+
+    // Agregar nuevo artículo
+    function agregarArticulo() {
+      const titulo = document.getElementById('titulo').value;
+      const texto = document.getElementById('texto').value;
+      if (!titulo || !texto) {
+        alert("Por favor completa ambos campos.");
+        return;
+      }
+
+      const tabla = document.querySelector("table");
+      const fila = tabla.insertRow(-1);
+      const celdaTitulo = fila.insertCell(0);
+      const celdaCategoria = fila.insertCell(1);
+      const celdaTexto = fila.insertCell(2);
+
+      celdaTitulo.textContent = titulo;
+      celdaCategoria.textContent = "Deportes";
+      celdaTexto.textContent = texto;
+
+      actualizarContador();
+      document.getElementById('titulo').value = '';
+      document.getElementById('texto').value = '';
+    }
+
+    // Actualizar contador de artículos
+    function actualizarContador() {
+      const filas = document.querySelectorAll("table tr").length - 1; // menos la cabecera
+      document.getElementById("contador").innerText = `Cantidad de artículos: ${filas}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', actualizarContador);
+
+    // Enviar formulario de contacto
+    function enviarContacto() {
+      const nombre = document.getElementById('nombreContacto').value;
+      const mensaje = document.getElementById('mensajeContacto').value;
+      if (!nombre || !mensaje) {
+        alert("Por favor completa el formulario.");
+        return;
+      }
+      alert(`Gracias, ${nombre}. Tu mensaje fue enviado.`);
+      document.getElementById('nombreContacto').value = '';
+      document.getElementById('mensajeContacto').value = '';
+    }
+  </script>
+</body>
+</html>
